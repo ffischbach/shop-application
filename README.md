@@ -18,7 +18,10 @@ Build a backend application in Node.js to handle the management of discount code
 
 ## Getting Started
 
-Start the mongo DB via ``docker-compose up -d``
+Start the mongo DB via:
+```
+docker compose --env-file .env.local up
+```
 
 ## HTTP Files
 To test single API endpoints I use Jetbrains [HTTP Client](https://www.jetbrains.com/help/idea/http-client-in-product-code-editor.html).

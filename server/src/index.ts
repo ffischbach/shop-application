@@ -1,7 +1,9 @@
 import express, { Request, Response } from 'express';
 import mongoose from 'mongoose';
+import * as dotenv from 'dotenv';
 import CouponModel from './models/Coupon';
 
+dotenv.config({ path: '../.env.local' });
 const app = express();
 const PORT = '8080';
 
@@ -21,8 +23,7 @@ app.post('/api/coupon', async (req: Request, res: Response) => {
   res.json(savedCoupon);
 });
 
-mongoose.connect('mongodb://root:rootpassword@127.0.0.1:27017')
-  .then(() => {
-    console.log(`listening on port ${PORT}`);
-    app.listen(8080);
-  });
+mongoose.connect(process.env.DB_URL!).then(() => {
+  console.log(`listening on port ${PORT}`);
+  app.listen(8080);
+});

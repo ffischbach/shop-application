@@ -5,8 +5,8 @@ services:
     image: mongo:latest
     container_name: mongoDB-Cont
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+      MONGO_INITDB_ROOT_USERNAME: ${DB_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASSWORD}
 
     ports:
       - 27017:27017
