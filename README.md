@@ -18,7 +18,7 @@ Build a backend application in Node.js to handle the management of discount code
 
 ## Getting Started
 
-``docker-compose up -d``
+Start the mongo DB via ``docker-compose up -d``
 
 
 ## Technologies Used
