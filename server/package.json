@@ -1,0 +1,26 @@
+{
+  "name": "bewerberaufgabe",
+  "author": "fynn fischbach",
+  "description": "This project is a job Application Task. The primary objectives are to implement a product display frontend and create a backend application in Node.js to manage discount codes.",
+  "main": "index.js",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "nodemon --watch \"src/**\" --ext \"ts,json\" --exec \"ts-node src/index.ts\"",
+    "lint": "eslint . --ext .ts"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "eslint-config-airbnb": "^19.0.4",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@typescript-eslint/eslint-plugin": "^6.13.1",
+    "@typescript-eslint/parser": "^6.13.1",
+    "eslint": "^8.54.0",
+    "nodemon": "^3.0.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.4.3"
+  }
+}
