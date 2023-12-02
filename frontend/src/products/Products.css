@@ -1,0 +1,27 @@
+.Products {
+    display: grid;
+    grid-gap: 20px;
+    padding: 0 10px 0 10px;
+}
+
+
+/* Mobile Ansicht */
+@media only screen and (max-width: 767px) {
+    .Products {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Tablet-Ansicht */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .Products {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Desktop-Ansicht */
+@media only screen and (min-width: 992px) {
+    .Products {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
