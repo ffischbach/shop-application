@@ -5,7 +5,12 @@ import Products from './products/Products'
 const App: any = () => {
   return (
     <div className="App">
-      <Products />
+        <h1 className="App-Header">
+            Our Products
+        </h1>
+        <div className="App-Body">
+            <Products />
+        </div>
     </div>
   )
 }
