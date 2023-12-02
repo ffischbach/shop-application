@@ -1,7 +1,9 @@
 import express, { Request, Response } from 'express';
 import mongoose from 'mongoose';
+import expressJSDocSwagger from 'express-jsdoc-swagger';
 import * as dotenv from 'dotenv';
-import CouponModel from './models/Coupon';
+import { options } from './swagger';
+import CouponModel from './coupons/models/Coupon';
 
 dotenv.config({ path: '../.env.local' });
 const app = express();
@@ -15,7 +17,9 @@ app.get('/api/coupons', (req: Request, res: Response) => {
 
 app.post('/api/coupon', async (req: Request, res: Response) => {
   const newCoupon = new CouponModel({
-    name: req.body.name
+    name: req.body.name,
+    code: req.body.code,
+    expiryDate: Date.parse(req.body.expiryDate)
   });
 
   const savedCoupon = await newCoupon.save();

@@ -2,5 +2,7 @@ POST http://localhost:8080/api/coupon
 Content-Type: application/json
 
 {
-  "name": "neuer coupon"
+  "name": "neuer coupon",
+  "code": "0dc7931f-c896-4847-b9e1-4d545b32853d",
+  "expiryDate": "2024-01-01T00:00:00.000Z"
 }
