@@ -70,6 +70,30 @@ export default class CouponController {
     }
   };
 
+  redeemCoupon = async (req: Request, res: Response): Promise<void> => {
+    console.debug('[CouponController] redeemCoupon called with id:', req.params.code);
+    const code: string = req.params.code;
+
+    try {
+      const redeemedCoupon: CouponDTO = await this.couponService.redeemCoupon(code);
+      res
+        .status(200)
+        .send(
+          'successfully redeemed code ' +
+            redeemedCoupon.code +
+            ' with ' +
+            redeemedCoupon.discount.type +
+            ' ' +
+            redeemedCoupon.discount.value +
+            ' ' +
+            redeemedCoupon.discount.currency,
+        );
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).json({ error: error.message });
+    }
+  };
+
   deleteCoupon = async (req: Request, res: Response): Promise<void> => {
     console.debug('[CouponController] deleteCoupon called with id:', req.params.id);
     const couponId = req.params.id;

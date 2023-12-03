@@ -34,6 +34,10 @@ const MongoDBCouponSchema = new Schema<CouponDocument>(
         required: false,
       },
     },
+    redeemed: {
+      type: Boolean,
+      required: true,
+    },
   },
   {
     timestamps: {

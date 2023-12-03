@@ -10,6 +10,7 @@ import {
 import { CouponUpdateDTO } from '../dto/CouponUpdateDTO';
 import crypto from 'crypto';
 import { CouponUpdateModel } from '../../domain/models/CouponUpdateModel';
+import { isValidUUID } from '../../shared/utils/Validators';
 
 class CouponService {
   private couponRepository: CouponRepository;
@@ -17,6 +18,8 @@ class CouponService {
   constructor(couponRepository: CouponRepository) {
     this.couponRepository = couponRepository;
   }
+
+  invalidCouponErrMsg: string = 'Invalid Coupon';
 
   async getCouponById(id: string): Promise<CouponDTO> {
     console.debug('[CouponService] getCouponById called');
@@ -44,24 +47,42 @@ class CouponService {
     return mapDocumentToDTO(savedCoupon);
   }
 
-  async updateCoupon(couponId: string, couponUpdateDTO: CouponUpdateDTO): Promise<CouponDTO | null> {
+  async updateCoupon(couponId: string, couponUpdateDTO: CouponUpdateDTO): Promise<CouponDTO> {
     console.debug('[CouponService] updateCoupon called');
 
     const couponUpdate: CouponUpdateModel = mapUpdateDTOtoCouponUpdate(couponUpdateDTO);
 
-    const result: CouponModel | null = await this.couponRepository.findByIdAndUpdate(couponId, couponUpdate);
+    const result: CouponModel = await this.couponRepository.findByIdAndUpdate(couponId, couponUpdate);
 
-    if (result) {
-      return mapDocumentToDTO(result);
-    } else {
-      return null;
-    }
+    return mapDocumentToDTO(result);
   }
 
   async deleteCoupon(couponId: string): Promise<boolean> {
     console.debug('[CouponService] deleteCoupon called');
 
     return this.couponRepository.delete(couponId);
+  }
+
+  async redeemCoupon(code: string): Promise<CouponDTO> {
+    if (!isValidUUID(code)) {
+      throw new Error('invalid uuid');
+    }
+
+    const coupon: CouponModel = await this.couponRepository.findByCode(code);
+    if (!coupon) {
+      throw new Error(this.invalidCouponErrMsg);
+    }
+
+    const now: Date = new Date();
+    if (coupon.redeemed == true || coupon.expiryDate < now) {
+      throw new Error(this.invalidCouponErrMsg);
+    }
+
+    const couponUpdate: CouponUpdateModel = { redeemed: true } as CouponUpdateModel;
+
+    const result: CouponModel = await this.couponRepository.findByIdAndUpdate(coupon._id, couponUpdate);
+
+    return mapDocumentToDTO(result);
   }
 }
 

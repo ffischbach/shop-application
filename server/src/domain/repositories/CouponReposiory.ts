@@ -13,6 +13,10 @@ class CouponRepository {
     return await this.couponRepositoryImpl.findById(id);
   }
 
+  async findByCode(code: string): Promise<CouponModel> {
+    return await this.couponRepositoryImpl.findByCode(code);
+  }
+
   async create(coupon: CouponModel): Promise<CouponModel> {
     return this.couponRepositoryImpl.create(coupon);
   }

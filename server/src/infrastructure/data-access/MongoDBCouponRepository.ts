@@ -13,6 +13,11 @@ class MongoDBCouponRepository {
     return result ? (result.toObject() as CouponModel) : null;
   }
 
+  async findByCode(code: string): Promise<CouponModel | null> {
+    const result = await this.model.findOne({ code }).exec();
+    return result ? (result.toObject() as CouponModel) : null;
+  }
+
   async create(coupon: CouponModel): Promise<CouponModel> {
     const result = await this.model.create(coupon);
     return result.toObject() as CouponModel;

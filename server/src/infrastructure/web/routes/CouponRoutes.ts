@@ -131,6 +131,20 @@ router.post('/coupon', couponController.createCoupon);
 router.put('/coupon/:id', couponController.updateCoupon);
 
 /**
+ * Put /api/coupon/redeem/:code
+ * @summary Redeems Coupon via code
+ * @tags coupons
+ * @param {string} code.path.required - coupon code
+ *
+ * @return {Coupon} 200 - coupon response
+ * @example response - 200 - successfully redeemed coupon response
+ * {
+ *   successfully redeemed code 946a666c-21fc-4154-bca8-cb6a2b1633c5 with amount 50 EUR
+ * }
+ */
+router.put('/coupon/redeem/:code', couponController.redeemCoupon);
+
+/**
  * Delete /api/coupon/:id
  * @summary Deletes coupon with id
  * @tags coupons
