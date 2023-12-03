@@ -65,7 +65,7 @@ class CouponService {
 
   async redeemCoupon(code: string): Promise<CouponDTO> {
     if (!isValidUUID(code)) {
-      throw new Error('invalid uuid');
+      throw new Error(this.invalidCouponErrMsg);
     }
 
     const coupon: CouponModel = await this.couponRepository.findByCode(code);
