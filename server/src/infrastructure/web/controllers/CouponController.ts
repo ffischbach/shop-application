@@ -13,13 +13,12 @@ export default class CouponController {
     const couponId: string = req.params.id;
 
     if (couponId.length != 24) {
-      res.status(500).json({ error: 'Coupon ID needs to be 24 char long' });
+      res.status(500).json({ error: 'Invalid Coupon Id' });
     }
 
     try {
       const coupon = await this.couponService.getCouponById(couponId);
       if (!coupon) {
-        console.error('Coupon not found');
         res.status(404).json({ error: 'Coupon not found' });
         return;
       }
@@ -50,6 +49,11 @@ export default class CouponController {
     const couponId = req.params.id;
     const updatedData = req.body;
 
+    if (couponId.length != 24) {
+      console.error('Invalid Coupon Id');
+      res.status(500).json({ error: 'Invalid Coupon Id' });
+    }
+
     try {
       const updatedCoupon = await this.couponService.updateCoupon(couponId, updatedData);
       if (!updatedCoupon) {
@@ -66,10 +70,15 @@ export default class CouponController {
   deleteCoupon = async (req: Request, res: Response): Promise<void> => {
     const couponId = req.params.id;
 
+    if (couponId.length != 24) {
+      console.error('Invalid Coupon Id');
+      res.status(404).json({ error: 'Invalid Coupon Id' });
+    }
+
     try {
       const deletedCoupon = await this.couponService.deleteCoupon(couponId);
       if (!deletedCoupon) {
-        res.status(404).json({ error: 'Coupon not found' });
+        res.status(404).json({ error: 'Coupon not found.' });
         return;
       }
       res.json({ message: 'Coupon deleted successfully' });

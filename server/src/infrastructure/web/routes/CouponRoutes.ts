@@ -43,7 +43,7 @@ const couponController = new CouponController(couponService);
  * GET /api/coupon/:id
  * @summary returns coupon with id
  * @tags coupons
- * @param {string} id.path - coupon id
+ * @param {string} id.path.required - coupon id
  * @return {Coupon} 200 - success response - application/json
  * @example response - 200 - success response example
  * {
@@ -57,7 +57,11 @@ const couponController = new CouponController(couponService);
  *     "currency": "EUR"
  *   }
  * }
- * @return {object} 400 - Bad request response
+ * @return {object} 404 - Not found response
+ * @example response - 404 - coupon not found
+ * {
+ *   "message": "Coupon not found."
+ * }
  */
 router.get('/coupon/:id', couponController.getCouponById);
 
@@ -90,7 +94,6 @@ router.get('/coupon/:id', couponController.getCouponById);
  *     "currency": "EUR"
  *   }
  * }
- * @return {object} 400 - Bad request response
  */
 router.post('/coupon', couponController.createCoupon);
 
@@ -124,7 +127,6 @@ router.post('/coupon', couponController.createCoupon);
  *     "currency": "EUR"
  *   }
  * }
- * @return {object} 400 - Bad request response
  */
 router.put('/coupon/:id', couponController.updateCoupon);
 
@@ -133,8 +135,16 @@ router.put('/coupon/:id', couponController.updateCoupon);
  * @summary Deletes coupon with id
  * @tags coupons
  * @param {string} id.path.required - coupon id
- * @return {boolean} 200 - coupon response
- * @return {object} 400 - Bad request response
+ * @return {object} 200 - coupon response
+ * @example response - 200 - successfully deleted coupon response
+ * {
+ *   "message": "Coupon deleted successfully"
+ * }
+ * @return {object} 404 - Not found response
+ * @example response - 404 - could not delete coupon response
+ * {
+ *   "message": "Could not delete. Coupon not found."
+ * }
  */
 router.delete('/coupon/:id', couponController.deleteCoupon);
 
