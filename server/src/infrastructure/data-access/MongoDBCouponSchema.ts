@@ -30,6 +30,7 @@ const MongoDBCouponSchema = new Schema<CouponDocument>(
       },
       currency: {
         type: String,
+        enum: ['EUR', 'USD'],
         required: false,
       },
     },

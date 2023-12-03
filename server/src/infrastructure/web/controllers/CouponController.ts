@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import CouponService from '../../../application/services/CouponService';
 import { CouponCreateDTO } from '../../../application/dto/CouponCreateDTO';
+import { CouponDTO } from '../../../application/dto/CouponDTO';
 
 export default class CouponController {
   private couponService: CouponService;
@@ -10,6 +11,7 @@ export default class CouponController {
   }
 
   getCouponById = async (req: Request, res: Response): Promise<void> => {
+    console.debug('[CouponController] getCouponById called with id:', req.params.id);
     const couponId: string = req.params.id;
 
     if (couponId.length != 24) {
@@ -17,7 +19,7 @@ export default class CouponController {
     }
 
     try {
-      const coupon = await this.couponService.getCouponById(couponId);
+      const coupon: CouponDTO = await this.couponService.getCouponById(couponId);
       if (!coupon) {
         res.status(404).json({ error: 'Coupon not found' });
         return;
@@ -37,7 +39,7 @@ export default class CouponController {
     const couponData: CouponCreateDTO = req.body;
 
     try {
-      const createdCoupon = await this.couponService.createCoupon(couponData);
+      const createdCoupon: CouponDTO = await this.couponService.createCoupon(couponData);
       res.status(201).json(createdCoupon);
     } catch (error) {
       console.error(error.message);
@@ -46,6 +48,7 @@ export default class CouponController {
   };
 
   updateCoupon = async (req: Request, res: Response): Promise<void> => {
+    console.debug('[CouponController] updateCoupon called with body ' + req.body + ' and id: ' + req.params.id);
     const couponId = req.params.id;
     const updatedData = req.body;
 
@@ -68,6 +71,7 @@ export default class CouponController {
   };
 
   deleteCoupon = async (req: Request, res: Response): Promise<void> => {
+    console.debug('[CouponController] deleteCoupon called with id:', req.params.id);
     const couponId = req.params.id;
 
     if (couponId.length != 24) {
