@@ -1,9 +1,9 @@
 import { Schema } from 'mongoose';
 import { Coupon } from '../../domain/models/Coupon';
 
-interface ICouponDocument extends Document, Coupon {}
+interface CouponDocument extends Document, Coupon {}
 
-const CouponSchema = new Schema<ICouponDocument>(
+const CouponSchema = new Schema<CouponDocument>(
   {
     name: {
       type: String,

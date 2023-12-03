@@ -4,7 +4,7 @@ import { CouponUpdateDTO } from '../dto/CouponUpdateDTO';
 import { CouponDTO } from '../dto/CouponDTO';
 
 export function mapCreateDTOtoCouponDocument(dto: CouponCreateDTO): Coupon {
-  console.debug('[couponDTOEntityMapper] mapping CouponCreationDTO to ICoupon');
+  console.debug('[couponDTOEntityMapper] mapping CouponCreationDTO to Coupon');
 
   if (!dto) {
     console.error('[couponDTOEntityMapper] CouponCreateDTO is undefined');
@@ -20,7 +20,7 @@ export function mapCreateDTOtoCouponDocument(dto: CouponCreateDTO): Coupon {
 }
 
 export function mapUpdateDTOtoDocument(dto: CouponUpdateDTO): Coupon {
-  console.debug('[couponDTOEntityMapper] mapping CouponUpdateDTO to ICoupon');
+  console.debug('[couponDTOEntityMapper] mapping CouponUpdateDTO to Coupon');
 
   const { name, code, expiryDate, discount } = dto;
   return {
@@ -32,7 +32,7 @@ export function mapUpdateDTOtoDocument(dto: CouponUpdateDTO): Coupon {
 }
 
 export function mapDocumentToDTO(doc: Coupon): CouponDTO {
-  console.debug('[couponDTOEntityMapper] mapping ICoupon to CouponDTO');
+  console.debug('[couponDTOEntityMapper] mapping Coupon to CouponDTO');
 
   return {
     id: doc._id,
