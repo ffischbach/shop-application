@@ -1,0 +1,13 @@
+PUT http://localhost:8080/api/coupon/656cf59b79ca3410c7ba0818
+Content-Type: application/json
+
+{
+  "name": "neuer name",
+  "expiryDate": "2025-01-01T00:00:00.000Z",
+  "discount": {
+    "type": "amount",
+    "value": 60,
+    "currency": "EUR"
+  }
+}
+
