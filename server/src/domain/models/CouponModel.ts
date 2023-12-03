@@ -1,6 +1,6 @@
 import { Document } from 'mongoose';
 
-export interface Coupon extends Document {
+export interface CouponModel extends Document {
   name: string;
   code: string;
   expiryDate: Date;

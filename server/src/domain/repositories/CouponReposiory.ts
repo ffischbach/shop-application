@@ -1,6 +1,6 @@
 import MongoDBCouponRepository from '../../infrastructure/data-access/MongoDBCouponRepository';
-import { Coupon } from '../models/Coupon';
-import { CouponUpdate } from '../models/CouponUpdate';
+import { CouponModel } from '../models/CouponModel';
+import { CouponUpdateModel } from '../models/CouponUpdateModel';
 
 class CouponRepository {
   private couponRepositoryImpl: MongoDBCouponRepository;
@@ -9,15 +9,15 @@ class CouponRepository {
     this.couponRepositoryImpl = couponRepositoryImpl;
   }
 
-  async findById(id: string): Promise<Coupon> {
+  async findById(id: string): Promise<CouponModel> {
     return await this.couponRepositoryImpl.findById(id);
   }
 
-  async create(coupon: Coupon): Promise<Coupon> {
+  async create(coupon: CouponModel): Promise<CouponModel> {
     return this.couponRepositoryImpl.create(coupon);
   }
 
-  async findByIdAndUpdate(id: string, couponFields: CouponUpdate): Promise<Coupon> {
+  async findByIdAndUpdate(id: string, couponFields: CouponUpdateModel): Promise<CouponModel> {
     return this.couponRepositoryImpl.findByIdAndUpdate(id, couponFields);
   }
 

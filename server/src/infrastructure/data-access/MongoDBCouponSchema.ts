@@ -1,9 +1,9 @@
 import { Schema } from 'mongoose';
-import { Coupon } from '../../domain/models/Coupon';
+import { CouponModel } from '../../domain/models/CouponModel';
 
-interface CouponDocument extends Document, Coupon {}
+interface CouponDocument extends Document, CouponModel {}
 
-const CouponSchema = new Schema<CouponDocument>(
+const MongoDBCouponSchema = new Schema<CouponDocument>(
   {
     name: {
       type: String,
@@ -42,4 +42,4 @@ const CouponSchema = new Schema<CouponDocument>(
   },
 );
 
-export default CouponSchema;
+export default MongoDBCouponSchema;

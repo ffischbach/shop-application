@@ -1,6 +1,6 @@
 import * as express from 'express';
 import CouponRepository from '../../../domain/repositories/CouponReposiory';
-import CouponModel from '../../../infrastructure/data-access/CouponModel';
+import MongoDBCouponModel from '../../data-access/MongoDBCouponModel';
 import MongoDBCouponRepository from '../../../infrastructure/data-access/MongoDBCouponRepository';
 import CouponService from '../../../application/services/CouponService';
 import CouponController from '../../../infrastructure/web/controllers/CouponController';
@@ -8,7 +8,7 @@ import CouponController from '../../../infrastructure/web/controllers/CouponCont
 const router = express.Router();
 router.use(express.json());
 
-const mongoDBCouponRepository: MongoDBCouponRepository = new MongoDBCouponRepository(CouponModel);
+const mongoDBCouponRepository: MongoDBCouponRepository = new MongoDBCouponRepository(MongoDBCouponModel);
 
 const couponRepository: CouponRepository = new CouponRepository(mongoDBCouponRepository);
 

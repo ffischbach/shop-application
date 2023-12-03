@@ -1,4 +1,4 @@
-export class CouponUpdate {
+export class CouponUpdateModel {
   name?: string;
   code?: string;
   expiryDate?: Date;

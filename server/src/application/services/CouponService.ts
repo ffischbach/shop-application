@@ -1,7 +1,7 @@
 import CouponRepository from '../../domain/repositories/CouponReposiory';
 import { CouponDTO } from '../dto/CouponDTO';
 import { CouponCreateDTO } from '../dto/CouponCreateDTO';
-import { Coupon } from '../../domain/models/Coupon';
+import { CouponModel } from '../../domain/models/CouponModel';
 import {
   mapCreateDTOtoCouponDocument,
   mapDocumentToDTO,
@@ -9,7 +9,7 @@ import {
 } from '../mapper/couponDTOEntityMapper';
 import { CouponUpdateDTO } from '../dto/CouponUpdateDTO';
 import crypto from 'crypto';
-import { CouponUpdate } from '../../domain/models/CouponUpdate';
+import { CouponUpdateModel } from '../../domain/models/CouponUpdateModel';
 
 class CouponService {
   private couponRepository: CouponRepository;
@@ -21,7 +21,7 @@ class CouponService {
   async getCouponById(id: string): Promise<CouponDTO> {
     console.debug('[CouponService] getCouponById called');
 
-    const coupon: Coupon = await this.couponRepository.findById(id);
+    const coupon: CouponModel = await this.couponRepository.findById(id);
 
     if (!coupon) {
       throw new Error('coupon not found');
@@ -33,7 +33,7 @@ class CouponService {
   async createCoupon(couponDTO: CouponCreateDTO): Promise<CouponDTO> {
     console.debug('[CouponService] createCoupon called with body', couponDTO);
 
-    const coupon: Coupon = mapCreateDTOtoCouponDocument(couponDTO);
+    const coupon: CouponModel = mapCreateDTOtoCouponDocument(couponDTO);
 
     coupon.code = crypto.randomUUID();
     const savedCoupon = await this.couponRepository.create(coupon);
@@ -46,9 +46,9 @@ class CouponService {
   async updateCoupon(couponId: string, couponUpdateDTO: CouponUpdateDTO): Promise<CouponDTO | null> {
     console.debug('[CouponService] updateCoupon called');
 
-    const couponUpdate: CouponUpdate = mapUpdateDTOtoCouponUpdate(couponUpdateDTO);
+    const couponUpdate: CouponUpdateModel = mapUpdateDTOtoCouponUpdate(couponUpdateDTO);
 
-    const result: Coupon | null = await this.couponRepository.findByIdAndUpdate(couponId, couponUpdate);
+    const result: CouponModel | null = await this.couponRepository.findByIdAndUpdate(couponId, couponUpdate);
 
     if (result) {
       return mapDocumentToDTO(result);

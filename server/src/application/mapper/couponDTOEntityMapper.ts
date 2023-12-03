@@ -1,15 +1,15 @@
 import { CouponCreateDTO } from '../dto/CouponCreateDTO';
-import { Coupon } from '../../domain/models/Coupon';
-import { CouponUpdate } from '../../domain/models/CouponUpdate';
+import { CouponModel } from '../../domain/models/CouponModel';
+import { CouponUpdateModel } from '../../domain/models/CouponUpdateModel';
 import { CouponUpdateDTO } from '../dto/CouponUpdateDTO';
 import { CouponDTO } from '../dto/CouponDTO';
 
-export function mapCreateDTOtoCouponDocument(dto: CouponCreateDTO): Coupon {
+export function mapCreateDTOtoCouponDocument(dto: CouponCreateDTO): CouponModel {
   console.debug('[couponDTOEntityMapper] mapping CouponCreationDTO to Coupon');
 
   if (!dto) {
     console.error('[couponDTOEntityMapper] CouponCreateDTO is undefined');
-    return {} as Coupon;
+    return {} as CouponModel;
   }
 
   const { name, expiryDate, discount } = dto;
@@ -17,10 +17,10 @@ export function mapCreateDTOtoCouponDocument(dto: CouponCreateDTO): Coupon {
     name,
     expiryDate,
     discount,
-  } as Coupon;
+  } as CouponModel;
 }
 
-export function mapUpdateDTOtoCouponUpdate(dto: CouponUpdateDTO): CouponUpdate {
+export function mapUpdateDTOtoCouponUpdate(dto: CouponUpdateDTO): CouponUpdateModel {
   console.debug('[couponDTOEntityMapper] mapping CouponUpdateDTO to Coupon');
 
   const { name, code, expiryDate, discount } = dto;
@@ -29,10 +29,10 @@ export function mapUpdateDTOtoCouponUpdate(dto: CouponUpdateDTO): CouponUpdate {
     code,
     expiryDate,
     discount,
-  } as CouponUpdate;
+  } as CouponUpdateModel;
 }
 
-export function mapDocumentToDTO(doc: Coupon): CouponDTO {
+export function mapDocumentToDTO(doc: CouponModel): CouponDTO {
   console.debug('[couponDTOEntityMapper] mapping Coupon to CouponDTO');
 
   return {
