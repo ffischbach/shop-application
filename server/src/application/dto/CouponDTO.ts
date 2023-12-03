@@ -8,4 +8,5 @@ export interface CouponDTO {
     value: number;
     currency?: string;
   };
+  redeemed: boolean;
 }

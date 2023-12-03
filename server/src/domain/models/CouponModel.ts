@@ -9,4 +9,5 @@ export interface CouponModel extends Document {
     value: number;
     currency: string;
   };
+  redeemed: boolean;
 }

@@ -7,4 +7,5 @@ export class CouponUpdateModel {
     value?: number;
     currency?: string;
   };
+  redeemed?: boolean;
 }

@@ -35,6 +35,7 @@ class CouponService {
 
     const coupon: CouponModel = mapCreateDTOtoCouponDocument(couponDTO);
 
+    coupon.redeemed = false;
     coupon.code = crypto.randomUUID();
     const savedCoupon = await this.couponRepository.create(coupon);
 

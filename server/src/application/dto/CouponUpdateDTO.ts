@@ -7,4 +7,5 @@ export interface CouponUpdateDTO {
     value?: number;
     currency?: string;
   };
+  redeemed?: boolean;
 }
