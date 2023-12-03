@@ -3,6 +3,10 @@ Content-Type: application/json
 
 {
   "name": "neuer coupon",
-  "code": "0dc7931f-c896-4847-b9e1-4d545b32853d",
-  "expiryDate": "2024-01-01T00:00:00.000Z"
+  "expiryDate": "2024-01-01T00:00:00.000Z",
+  "discount": {
+    "type": "amount",
+    "value": 50,
+    "currency": "EUR"
+  }
 }
