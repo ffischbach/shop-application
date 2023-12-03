@@ -1,7 +1,8 @@
 export const options = {
   info: {
     version: '1.0.0',
-    title: 'Albums store',
+    title: 'Fynns Shop Application',
+    description: 'This is the API Documentation to manage coupons',
     license: {
       name: 'MIT',
     },
