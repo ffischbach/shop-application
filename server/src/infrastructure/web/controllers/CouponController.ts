@@ -25,6 +25,9 @@ export default class CouponController {
       }
       res.json(coupon);
     } catch (error) {
+      if (error.message == 'coupon not found') {
+        res.status(404).json({ error: error.message });
+      }
       console.error(error.message);
       res.status(500).json({ error: error.message });
     }

@@ -17,6 +17,11 @@ class CouponService {
     console.debug('[CouponService] getCouponById called');
 
     const coupon: Coupon = await this.couponRepository.findById(id);
+
+    if (!coupon) {
+      throw new Error('coupon not found');
+    }
+
     return mapDocumentToDTO(coupon);
   }
 
