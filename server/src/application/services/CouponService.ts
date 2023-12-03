@@ -2,9 +2,14 @@ import CouponRepository from '../../domain/repositories/CouponReposiory';
 import { CouponDTO } from '../dto/CouponDTO';
 import { CouponCreateDTO } from '../dto/CouponCreateDTO';
 import { Coupon } from '../../domain/models/Coupon';
-import { mapCreateDTOtoCouponDocument, mapDocumentToDTO } from '../mapper/couponDTOEntityMapper';
+import {
+  mapCreateDTOtoCouponDocument,
+  mapDocumentToDTO,
+  mapUpdateDTOtoCouponUpdate,
+} from '../mapper/couponDTOEntityMapper';
 import { CouponUpdateDTO } from '../dto/CouponUpdateDTO';
 import crypto from 'crypto';
+import { CouponUpdate } from '../../domain/models/CouponUpdate';
 
 class CouponService {
   private couponRepository: CouponRepository;
@@ -38,21 +43,12 @@ class CouponService {
     return mapDocumentToDTO(savedCoupon);
   }
 
-  async updateCoupon(couponId: string, updatedFields: Partial<CouponUpdateDTO>): Promise<CouponDTO | null> {
+  async updateCoupon(couponId: string, couponUpdateDTO: CouponUpdateDTO): Promise<CouponDTO | null> {
     console.debug('[CouponService] updateCoupon called');
 
-    const existingCoupon: Coupon | null = await this.couponRepository.findById(couponId);
+    const couponUpdate: CouponUpdate = mapUpdateDTOtoCouponUpdate(couponUpdateDTO);
 
-    if (!existingCoupon) {
-      return null;
-    }
-
-    const updatedCoupon = {
-      ...existingCoupon.toObject(), // Convert Mongoose document to plain object
-      ...updatedFields,
-    };
-
-    const result: Coupon | null = await this.couponRepository.update(updatedCoupon);
+    const result: Coupon | null = await this.couponRepository.findByIdAndUpdate(couponId, couponUpdate);
 
     if (result) {
       return mapDocumentToDTO(result);

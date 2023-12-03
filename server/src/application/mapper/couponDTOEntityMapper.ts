@@ -1,5 +1,6 @@
 import { CouponCreateDTO } from '../dto/CouponCreateDTO';
 import { Coupon } from '../../domain/models/Coupon';
+import { CouponUpdate } from '../../domain/models/CouponUpdate';
 import { CouponUpdateDTO } from '../dto/CouponUpdateDTO';
 import { CouponDTO } from '../dto/CouponDTO';
 
@@ -19,7 +20,7 @@ export function mapCreateDTOtoCouponDocument(dto: CouponCreateDTO): Coupon {
   } as Coupon;
 }
 
-export function mapUpdateDTOtoDocument(dto: CouponUpdateDTO): Coupon {
+export function mapUpdateDTOtoCouponUpdate(dto: CouponUpdateDTO): CouponUpdate {
   console.debug('[couponDTOEntityMapper] mapping CouponUpdateDTO to Coupon');
 
   const { name, code, expiryDate, discount } = dto;
@@ -28,7 +29,7 @@ export function mapUpdateDTOtoDocument(dto: CouponUpdateDTO): Coupon {
     code,
     expiryDate,
     discount,
-  } as Coupon;
+  } as CouponUpdate;
 }
 
 export function mapDocumentToDTO(doc: Coupon): CouponDTO {

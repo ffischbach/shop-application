@@ -1,4 +1,4 @@
-import mongoose, { Model } from 'mongoose';
+import { Model } from 'mongoose';
 import { Coupon } from '../../domain/models/Coupon';
 
 class MongoDBCouponRepository {
@@ -9,8 +9,7 @@ class MongoDBCouponRepository {
   }
 
   async findById(id: string): Promise<Coupon | null> {
-    const objectId = new mongoose.Types.ObjectId(id);
-    const result = await this.model.findById(objectId).exec();
+    const result = await this.model.findById(id).exec();
     return result ? (result.toObject() as Coupon) : null;
   }
 
@@ -19,8 +18,8 @@ class MongoDBCouponRepository {
     return result.toObject() as Coupon;
   }
 
-  async update(coupon: Coupon): Promise<Coupon> {
-    const result = await this.model.findByIdAndUpdate(coupon._id, coupon, { new: true }).exec();
+  async findByIdAndUpdate(id: string, updateFields): Promise<Coupon> {
+    const result = await this.model.findByIdAndUpdate(id, updateFields, { new: false }).exec();
     return result ? (result.toObject() as Coupon) : null;
   }
 
