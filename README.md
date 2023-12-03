@@ -57,6 +57,9 @@ TODO: docker-compose um frontend und backend container erweitern
 To test single API endpoints I use Jetbrains [HTTP Client](https://www.jetbrains.com/help/idea/http-client-in-product-code-editor.html).
 You can find some of those in the [http-requests directory](./assets/http-requests)
 
+
+## API
+You can find the API Documentation under http://localhost:8080/api-docs/ (Server needs to be running)
 ___
 
 ## Resources: 
