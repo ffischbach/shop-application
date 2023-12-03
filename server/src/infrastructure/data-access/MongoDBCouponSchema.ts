@@ -7,7 +7,7 @@ const MongoDBCouponSchema = new Schema<CouponDocument>(
   {
     name: {
       type: String,
-      required: true,
+      required: false,
     },
     code: {
       type: String,
@@ -30,7 +30,7 @@ const MongoDBCouponSchema = new Schema<CouponDocument>(
       },
       currency: {
         type: String,
-        required: true,
+        required: false,
       },
     },
   },

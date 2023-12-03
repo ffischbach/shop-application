@@ -1,5 +1,5 @@
 export interface CouponCreateDTO {
-  name: string;
+  name?: string;
   expiryDate: Date;
   discount: {
     type: 'percent' | 'amount';
