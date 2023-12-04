@@ -1,9 +1,9 @@
 import express from 'express';
-import mongoose from 'mongoose';
 import expressJSDocSwagger from 'express-jsdoc-swagger';
 import { config } from 'dotenv';
-import { options } from './swagger';
+import { options } from './config/swagger';
 import couponRoutes from './application/web/routes/CouponRoutes';
+import { databaseConnect } from './config/databse';
 
 config({ path: '../.env.local' });
 
@@ -16,7 +16,7 @@ expressJSDocSwagger(app)(options);
 
 async function startServer() {
   try {
-    await mongoose.connect(process.env.DB_URL!);
+    await databaseConnect();
     console.log(`Connected to MongoDB`);
 
     app.listen(PORT, () => {
