@@ -4,6 +4,7 @@ import MongoDBCouponModel from '../../data-access/MongoDBCouponModel';
 import MongoDBCouponRepository from '../../../infrastructure/data-access/MongoDBCouponRepository';
 import CouponService from '../../../application/services/CouponService';
 import CouponController from '../../../infrastructure/web/controllers/CouponController';
+import { body, ValidationChain } from 'express-validator';
 
 const router = express.Router();
 router.use(express.json());
@@ -104,7 +105,13 @@ router.get('/coupon/:id', couponController.getCouponById);
  *   }
  * }
  */
-router.post('/coupon', couponController.createCoupon);
+const createCouponValidator: ValidationChain[] = [
+  body('expiryDate').optional().isString(),
+  body('discount.type').isIn(['PERCENT', 'AMOUNT']).withMessage('Invalid discount type'),
+  body('discount.value').isNumeric(),
+  body('discount.currency').optional().isIn(['EUR', 'USD']).withMessage('Invalid currency type'),
+];
+router.post('/coupon', createCouponValidator, couponController.createCoupon);
 
 /**
  * Put /api/coupon/:id
@@ -137,7 +144,13 @@ router.post('/coupon', couponController.createCoupon);
  *   }
  * }
  */
-router.put('/coupon/:id', couponController.updateCoupon);
+const updateCouponValidator: ValidationChain[] = [
+  body('expiryDate').optional().isString().withMessage('Invalid expiration date'),
+  body('discount.type').optional().isIn(['PERCENT', 'AMOUNT']).withMessage('Invalid discount type'),
+  body('discount.value').optional().isNumeric().withMessage('Invalid discount value'),
+  body('discount.currency').optional().isIn(['EUR', 'USD']).withMessage('Invalid currency type'),
+];
+router.put('/coupon/:id', updateCouponValidator, couponController.updateCoupon);
 
 /**
  * Put /api/coupon/redeem/:code
