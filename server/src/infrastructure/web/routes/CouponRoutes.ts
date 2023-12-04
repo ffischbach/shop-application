@@ -50,7 +50,7 @@ const couponController = new CouponController(couponService);
  *   "id": "656cdb871eb8bda7fabfa04f",
  *   "name": "name",
  *   "code": "20fe00ef-2f50-49c3-b3cb-b48166e3560a",
- *   "expiryDate": "2024-01-01T00:00:00.000Z",
+ *   "expiryDate": "2024-01-01",
  *   "discount": {
  *     "type": "amount",
  *     "value": 50,
@@ -73,7 +73,7 @@ router.get('/coupon/:id', couponController.getCouponById);
  * @example request - to successfully create a new coupon with value 50 €
  * {
  *   "name": "new amount coupon",
- *   "expiryDate": "2024-01-01T00:00:00.000Z",
+ *   "expiryDate": "2024-01-01",
  *   "discount": {
  *     "type": "AMOUNT",
  *     "value": 50,
@@ -83,7 +83,7 @@ router.get('/coupon/:id', couponController.getCouponById);
  * @example request - to successfully create a new coupon with value 50 %
  * {
  *   "name": "new percent coupon",
- *   "expiryDate": "2024-01-01T00:00:00.000Z",
+ *   "expiryDate": "2024-01-01",
  *   "discount": {
  *     "type": "PERCENT",
  *     "value": 30,
@@ -96,7 +96,7 @@ router.get('/coupon/:id', couponController.getCouponById);
  *   "id": "656cdb871eb8bda7fabfa04f",
  *   "name": "name",
  *   "code": "20fe00ef-2f50-49c3-b3cb-b48166e3560a",
- *   "expiryDate": "2024-01-01T00:00:00.000Z",
+ *   "expiryDate": "2024-01-01",
  *   "discount": {
  *     "type": "AMOUNT",
  *     "value": 50,
@@ -115,7 +115,7 @@ router.post('/coupon', couponController.createCoupon);
  * @example request - to successfully create a new coupon
  * {
  *   "name": "neuer coupon",
- *   "expiryDate": "2024-01-01T00:00:00.000Z",
+ *   "expiryDate": "2024-01-01",
  *   "discount": {
  *     "type": "AMOUNT",
  *     "value": 50,
@@ -129,7 +129,7 @@ router.post('/coupon', couponController.createCoupon);
  *   "id": "656cdb871eb8bda7fabfa04f",
  *   "name": "name",
  *   "code": "20fe00ef-2f50-49c3-b3cb-b48166e3560a",
- *   "expiryDate": "2024-01-01T00:00:00.000Z",
+ *   "expiryDate": "2024-01-01",
  *   "discount": {
  *     "type": "AMOUNT",
  *     "value": 50,
