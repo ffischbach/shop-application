@@ -7,6 +7,7 @@ const Product: React.FC<{ productDetails: ProductType }> = (props) => {
   const details: ProductType = props.productDetails
   return (
     <div className="product">
+        <img className="limited-badge" src="/limited-icon.png"/>
         <img className="product-image" src={details.imageLink}/>
         <p className="product-name">{ details.name }</p>
         <ProductPrice price={details.price}/>

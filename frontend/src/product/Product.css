@@ -10,6 +10,15 @@
     box-shadow: 0 0 10px 5px rgba(32,32,30,0.2);
 }
 
+.limited-badge {
+    height: 50px;
+    width: 50px;
+    align-self: start;
+    margin-left: 10px;
+    margin-bottom: -25px;
+    rotate: 25deg;
+}
+
 .product-image {
     height: 40%;
 }

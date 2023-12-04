@@ -63,4 +63,6 @@ You can find the API Documentation under http://localhost:8080/api-docs/ (Server
 ___
 
 ## Resources: 
-Icons in Diagram: https://de.freepik.com/
+Icons: 
+https://de.freepik.com/icon/begrenzt_5212124
+https://de.freepik.com/icon/stehender-mann_10522#fromView=search&term=person&page=1&position=4&track=ais&uuid=d3caba72-bbb2-486a-8fcf-953535eff0ed
