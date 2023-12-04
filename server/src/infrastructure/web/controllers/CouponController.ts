@@ -35,6 +35,7 @@ export default class CouponController {
     } catch (error) {
       if (error.message == 'coupon not found') {
         res.status(404).json({ error: error.message });
+        return;
       }
       console.error(error.message);
       res.status(500).json({ error: error.message });
@@ -112,9 +113,7 @@ export default class CouponController {
             ' with ' +
             redeemedCoupon.discount.type +
             ' ' +
-            redeemedCoupon.discount.value +
-            ' ' +
-            redeemedCoupon.discount.currency,
+            redeemedCoupon.discount.value,
         );
     } catch (error) {
       console.error(error.message);

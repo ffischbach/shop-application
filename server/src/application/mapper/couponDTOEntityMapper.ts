@@ -34,15 +34,32 @@ export function mapUpdateDTOtoCouponUpdate(dto: CouponUpdateDTO): CouponUpdateMo
 export function mapDocumentToDTO(doc: CouponModel): CouponDTO {
   console.debug('[couponDTOEntityMapper] mapping Coupon to CouponDTO');
 
-  return {
-    id: doc._id,
-    code: doc.code,
-    expiryDate: doc.expiryDate,
-    discount: {
-      type: doc.discount.type,
-      value: doc.discount.value,
-      currency: doc.discount.currency,
-    },
-    redeemed: doc.redeemed,
-  };
+  if (doc.discount && 'type' in doc.discount) {
+    if (doc.discount.type === 'AMOUNT') {
+      return {
+        id: doc._id,
+        code: doc.code,
+        expiryDate: doc.expiryDate,
+        discount: {
+          type: doc.discount.type,
+          value: doc.discount.value,
+          currency: doc.discount.currency,
+        },
+        redeemed: doc.redeemed,
+      } as CouponDTO;
+    } else {
+      return {
+        id: doc._id,
+        code: doc.code,
+        expiryDate: doc.expiryDate,
+        discount: {
+          type: doc.discount.type,
+          value: doc.discount.value,
+        },
+        redeemed: doc.redeemed,
+      } as CouponDTO;
+    }
+  } else {
+    throw new Error(`can not map CouponModel with ${doc.discount} type to DTO `);
+  }
 }

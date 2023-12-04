@@ -1,9 +1,7 @@
 import { Schema } from 'mongoose';
-import { CouponModel } from '../../domain/models/CouponModel';
+import { AmountCoupon, CouponModel, PercentCoupon } from '../../domain/models/CouponModel';
 
-interface CouponDocument extends Document, CouponModel {}
-
-const MongoDBCouponSchema = new Schema<CouponDocument>(
+const MongoDBCouponSchema = new Schema<CouponModel>(
   {
     code: {
       type: String,
@@ -15,9 +13,41 @@ const MongoDBCouponSchema = new Schema<CouponDocument>(
       required: true,
     },
     discount: {
+      type: Schema.Types.Mixed,
+      default: {},
+    },
+  },
+  {
+    timestamps: {
+      createdAt: 'createdAt',
+      updatedAt: 'updatedAt',
+    },
+  },
+);
+
+export const PercentCouponSchema = new Schema<PercentCoupon>(
+  {
+    discount: {
       type: {
         type: String,
-        enum: ['PERCENT', 'AMOUNT'],
+        enum: ['PERCENT'],
+        required: true,
+      },
+      value: {
+        type: Number,
+        required: true,
+      },
+    },
+  },
+  { discriminatorKey: 'discountType' },
+);
+
+export const AmountCouponSchema = new Schema<AmountCoupon>(
+  {
+    discount: {
+      type: {
+        type: String,
+        enum: ['AMOUNT'],
         required: true,
       },
       value: {
@@ -30,17 +60,8 @@ const MongoDBCouponSchema = new Schema<CouponDocument>(
         required: false,
       },
     },
-    redeemed: {
-      type: Boolean,
-      required: true,
-    },
   },
-  {
-    timestamps: {
-      createdAt: 'createdAt',
-      updatedAt: 'updatedAt',
-    },
-  },
+  { discriminatorKey: 'discountType' },
 );
 
 export default MongoDBCouponSchema;
