@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import CouponService from '../../../application/services/CouponService';
-import { CouponCreateInputDTO } from '../../../application/dto/CouponCreateInputDTO';
-import { CouponDTO } from '../../../application/dto/CouponDTO';
+import CouponService from '../../../domain/services/CouponService';
+import { CouponCreateInputDTO } from '../../dto/CouponCreateInputDTO';
+import { CouponDTO } from '../../dto/CouponDTO';
 import { validationResult } from 'express-validator';
 
 export default class CouponController {

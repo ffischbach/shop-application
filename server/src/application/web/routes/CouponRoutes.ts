@@ -1,9 +1,9 @@
 import * as express from 'express';
 import CouponRepository from '../../../domain/repositories/CouponReposiory';
-import MongoDBCouponModel from '../../data-access/MongoDBCouponModel';
+import MongoDBCouponModel from '../../../infrastructure/data-access/MongoDBCouponModel';
 import MongoDBCouponRepository from '../../../infrastructure/data-access/MongoDBCouponRepository';
-import CouponService from '../../../application/services/CouponService';
-import CouponController from '../../../infrastructure/web/controllers/CouponController';
+import CouponService from '../../../domain/services/CouponService';
+import CouponController from '../controllers/CouponController';
 import { body, ValidationChain } from 'express-validator';
 
 const router = express.Router();
@@ -23,8 +23,7 @@ const couponController = new CouponController(couponService);
  * @property {string} code.required - The coupon code is required in the response
  * @property {string} expiryDate.required - The coupon expiration Date as string
  * @property {CouponDiscount} discount.required - The discount details
- */
-/**
+ *
  * Coupon Discount
  * @typedef {object} CouponDiscount
  * @property {string} type.required - enum:PERCENT,AMOUNT - The discount type (percentage or amount)
@@ -33,11 +32,29 @@ const couponController = new CouponController(couponService);
  */
 
 /**
- * Coupon Request Payload
- * @typedef {object} CouponRequestPayload
+ * Amount Coupon Request Payload
+ * @typedef {object} AmountCouponRequestPayload
  * @property {string} name.required - The coupon name is required in Payload
  * @property {string} expiryDate.required - The expiration Date (as string) is required
- * @property {CouponDiscount} discount.required - The discount details
+ * @property {AmountCouponDiscount} discount.required - The discount details
+ *
+ * Amount Coupon Discount
+ * @typedef {object} AmountCouponDiscount
+ * @property {string} type.required - enum:AMOUNT - The discount type
+ * @property {string} value.required - The value height
+ * @property {string} currency - enum:EUR,USD - If type of discount is amount currency needs to be selected (EUR or USD)
+ *
+ *
+ * Percentage Coupon Request Payload
+ * @typedef {object} PercentageCouponRequestPayload
+ * @property {string} name.required - The coupon name is required in Payload
+ * @property {string} expiryDate.required - The expiration Date (as string) is required
+ * @property {PercentageCouponDiscount} discount.required - The discount details
+ *
+ * Percentage Coupon Discount
+ * @typedef {object} PercentageCouponDiscount
+ * @property {string} type.required - enum:PERCENT - The discount type
+ * @property {string} value.required - The value height
  */
 
 /**
@@ -49,7 +66,6 @@ const couponController = new CouponController(couponService);
  * @example response - 200 - success response example
  * {
  *   "id": "656cdb871eb8bda7fabfa04f",
- *   "name": "name",
  *   "code": "20fe00ef-2f50-49c3-b3cb-b48166e3560a",
  *   "expiryDate": "2024-01-01",
  *   "discount": {
@@ -90,10 +106,9 @@ router.get('/coupon/redeemable/:code', couponController.validateCouponCode);
  * POST /api/coupon
  * @summary Create a new coupon
  * @tags coupons
- * @param {CouponRequestPayload} request.body.required - coupon info
+ * @param {AmountCouponRequestPayload} request.body.required - coupon info
  * @example request - to successfully create a new coupon with value 50 €
  * {
- *   "name": "new amount coupon",
  *   "expiryDate": "2024-01-01",
  *   "discount": {
  *     "type": "AMOUNT",
@@ -101,13 +116,13 @@ router.get('/coupon/redeemable/:code', couponController.validateCouponCode);
  *     "currency": "EUR"
  *   }
  * }
- * @example request - to successfully create a new coupon with value 50 %
+ * @param {PercentageCouponRequestPayload} request.body.required - coupon info
+ * @example request - to successfully create a new coupon with Percentage Bonus of 25%
  * {
- *   "name": "new percent coupon",
  *   "expiryDate": "2024-01-01",
  *   "discount": {
  *     "type": "PERCENT",
- *     "value": 30,
+ *     "value": 25
  *   }
  * }
  *
@@ -115,7 +130,6 @@ router.get('/coupon/redeemable/:code', couponController.validateCouponCode);
  * @example response - 201 - successfully created coupon response
  * {
  *   "id": "656cdb871eb8bda7fabfa04f",
- *   "name": "name",
  *   "code": "20fe00ef-2f50-49c3-b3cb-b48166e3560a",
  *   "expiryDate": "2024-01-01",
  *   "discount": {
@@ -138,10 +152,9 @@ router.post('/coupon', createCouponValidator, couponController.createCoupon);
  * @summary Updates coupon with id
  * @tags coupons
  * @param {string} id.path.required - coupon id
- * @param {CouponRequestPayload} request.body.required - coupon info
+ * @param {AmountCouponRequestPayload} request.body.required - coupon info
  * @example request - to successfully create a new coupon
  * {
- *   "name": "neuer coupon",
  *   "expiryDate": "2024-01-01",
  *   "discount": {
  *     "type": "AMOUNT",
@@ -154,7 +167,6 @@ router.post('/coupon', createCouponValidator, couponController.createCoupon);
  * @example response - 200 - successfully updated coupon response
  * {
  *   "id": "656cdb871eb8bda7fabfa04f",
- *   "name": "name",
  *   "code": "20fe00ef-2f50-49c3-b3cb-b48166e3560a",
  *   "expiryDate": "2024-01-01",
  *   "discount": {

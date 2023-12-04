@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import expressJSDocSwagger from 'express-jsdoc-swagger';
 import { config } from 'dotenv';
 import { options } from './swagger';
-import couponRoutes from './infrastructure/web/routes/CouponRoutes';
+import couponRoutes from './application/web/routes/CouponRoutes';
 
 config({ path: '../.env.local' });
 

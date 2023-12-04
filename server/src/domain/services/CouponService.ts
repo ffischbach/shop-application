@@ -1,15 +1,15 @@
-import CouponRepository from '../../domain/repositories/CouponReposiory';
-import { CouponDTO } from '../dto/CouponDTO';
-import { CouponCreateInputDTO } from '../dto/CouponCreateInputDTO';
-import { CouponModel } from '../../domain/models/CouponModel';
+import CouponRepository from '../repositories/CouponReposiory';
+import { CouponDTO } from '../../application/dto/CouponDTO';
+import { CouponCreateInputDTO } from '../../application/dto/CouponCreateInputDTO';
+import { CouponModel } from '../models/CouponModel';
 import {
   mapCreateDTOtoCouponDocument,
   mapDocumentToDTO,
   mapUpdateDTOtoCouponUpdate,
-} from '../mapper/couponDTOEntityMapper';
-import { CouponUpdateInputDTO } from '../dto/CouponUpdateInputDTO';
+} from '../../application/mapper/couponDTOEntityMapper';
+import { CouponUpdateInputDTO } from '../../application/dto/CouponUpdateInputDTO';
 import crypto from 'crypto';
-import { CouponUpdateModel } from '../../domain/models/CouponUpdateModel';
+import { CouponUpdateModel } from '../models/CouponUpdateModel';
 import { isValidUUID } from '../../shared/utils/Validators';
 
 class CouponService {
