@@ -1,13 +1,13 @@
 import CouponRepository from '../../domain/repositories/CouponReposiory';
 import { CouponDTO } from '../dto/CouponDTO';
-import { CouponCreateDTO } from '../dto/CouponCreateDTO';
+import { CouponCreateInputDTO } from '../dto/CouponCreateInputDTO';
 import { CouponModel } from '../../domain/models/CouponModel';
 import {
   mapCreateDTOtoCouponDocument,
   mapDocumentToDTO,
   mapUpdateDTOtoCouponUpdate,
 } from '../mapper/couponDTOEntityMapper';
-import { CouponUpdateDTO } from '../dto/CouponUpdateDTO';
+import { CouponUpdateInputDTO } from '../dto/CouponUpdateInputDTO';
 import crypto from 'crypto';
 import { CouponUpdateModel } from '../../domain/models/CouponUpdateModel';
 import { isValidUUID } from '../../shared/utils/Validators';
@@ -33,7 +33,7 @@ class CouponService {
     return mapDocumentToDTO(coupon);
   }
 
-  async createCoupon(couponDTO: CouponCreateDTO): Promise<CouponDTO> {
+  async createCoupon(couponDTO: CouponCreateInputDTO): Promise<CouponDTO> {
     console.debug('[CouponService] createCoupon called with body', couponDTO);
 
     const coupon: CouponModel = mapCreateDTOtoCouponDocument(couponDTO);
@@ -47,7 +47,7 @@ class CouponService {
     return mapDocumentToDTO(savedCoupon);
   }
 
-  async updateCoupon(couponId: string, couponUpdateDTO: CouponUpdateDTO): Promise<CouponDTO> {
+  async updateCoupon(couponId: string, couponUpdateDTO: CouponUpdateInputDTO): Promise<CouponDTO> {
     console.debug('[CouponService] updateCoupon called');
 
     const couponUpdate: CouponUpdateModel = mapUpdateDTOtoCouponUpdate(couponUpdateDTO);

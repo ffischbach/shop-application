@@ -1,11 +1,22 @@
-export interface CouponDTO {
-  id: string;
+interface BaseCoupon {
   code: string;
   expiryDate: Date;
-  discount: {
-    type: 'PERCENT' | 'AMOUNT';
-    value: number;
-    currency?: 'EUR' | 'USD';
-  };
   redeemed: boolean;
 }
+
+export interface PercentCouponDTO extends BaseCoupon {
+  discount: {
+    type: 'PERCENT';
+    value: number;
+  };
+}
+
+export interface AmountCouponDTO extends BaseCoupon {
+  discount: {
+    type: 'AMOUNT';
+    value: number;
+    currency: 'EUR' | 'USD';
+  };
+}
+
+export type CouponDTO = PercentCouponDTO | AmountCouponDTO;

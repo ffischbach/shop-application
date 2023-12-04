@@ -2,7 +2,7 @@ export class CouponUpdateModel {
   code?: string;
   expiryDate?: Date;
   discount?: {
-    type?: 'percent' | 'amount';
+    type?: 'PERCENT' | 'AMOUNT';
     value?: number;
     currency?: string;
   };

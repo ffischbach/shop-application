@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import CouponService from '../../../application/services/CouponService';
-import { CouponCreateDTO } from '../../../application/dto/CouponCreateDTO';
+import { CouponCreateInputDTO } from '../../../application/dto/CouponCreateInputDTO';
 import { CouponDTO } from '../../../application/dto/CouponDTO';
 import { validationResult } from 'express-validator';
 
@@ -51,7 +51,7 @@ export default class CouponController {
       return;
     }
 
-    const couponData: CouponCreateDTO = req.body;
+    const couponData: CouponCreateInputDTO = req.body;
 
     try {
       const createdCoupon: CouponDTO = await this.couponService.createCoupon(couponData);
@@ -105,16 +105,7 @@ export default class CouponController {
 
     try {
       const redeemedCoupon: CouponDTO = await this.couponService.redeemCoupon(code);
-      res
-        .status(200)
-        .send(
-          'successfully redeemed code ' +
-            redeemedCoupon.code +
-            ' with ' +
-            redeemedCoupon.discount.type +
-            ' ' +
-            redeemedCoupon.discount.value,
-        );
+      res.status(200).send('successfully redeemed code ' + redeemedCoupon.code);
     } catch (error) {
       console.error(error.message);
       res.status(500).json({ error: error.message });

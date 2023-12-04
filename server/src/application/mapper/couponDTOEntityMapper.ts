@@ -1,10 +1,10 @@
-import { CouponCreateDTO } from '../dto/CouponCreateDTO';
+import { CouponCreateInputDTO } from '../dto/CouponCreateInputDTO';
 import { CouponModel } from '../../domain/models/CouponModel';
 import { CouponUpdateModel } from '../../domain/models/CouponUpdateModel';
-import { CouponUpdateDTO } from '../dto/CouponUpdateDTO';
+import { CouponUpdateInputDTO } from '../dto/CouponUpdateInputDTO';
 import { CouponDTO } from '../dto/CouponDTO';
 
-export function mapCreateDTOtoCouponDocument(dto: CouponCreateDTO): CouponModel {
+export function mapCreateDTOtoCouponDocument(dto: CouponCreateInputDTO): CouponModel {
   console.debug('[couponDTOEntityMapper] mapping CouponCreationDTO to Coupon');
 
   if (!dto) {
@@ -19,7 +19,7 @@ export function mapCreateDTOtoCouponDocument(dto: CouponCreateDTO): CouponModel 
   } as CouponModel;
 }
 
-export function mapUpdateDTOtoCouponUpdate(dto: CouponUpdateDTO): CouponUpdateModel {
+export function mapUpdateDTOtoCouponUpdate(dto: CouponUpdateInputDTO): CouponUpdateModel {
   console.debug('[couponDTOEntityMapper] mapping CouponUpdateDTO to Coupon');
 
   const { code, expiryDate, discount, redeemed } = dto;

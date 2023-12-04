@@ -1,8 +1,8 @@
-export interface CouponUpdateDTO {
+export interface CouponUpdateInputDTO {
   code?: string;
   expiryDate?: Date;
   discount?: {
-    type?: 'percent' | 'amount';
+    type?: 'PERCENT' | 'AMOUNT';
     value?: number;
     currency?: string;
   };
