@@ -1,5 +1,4 @@
 export class CouponUpdateModel {
-  name?: string;
   code?: string;
   expiryDate?: Date;
   discount?: {

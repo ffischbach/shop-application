@@ -1,5 +1,4 @@
 export interface CouponUpdateDTO {
-  name?: string;
   code?: string;
   expiryDate?: Date;
   discount?: {

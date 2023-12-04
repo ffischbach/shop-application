@@ -19,7 +19,7 @@ const couponController = new CouponController(couponService);
 /**
  * Coupon
  * @typedef {object} Coupon
- * @property {string} name.required - The coupon name is required in the response
+ * @property {string} code.required - The coupon code is required in the response
  * @property {string} expiryDate.required - The coupon expiration Date as string
  * @property {CouponDiscount} discount.required - The discount details
  */

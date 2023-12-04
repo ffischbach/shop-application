@@ -12,9 +12,8 @@ export function mapCreateDTOtoCouponDocument(dto: CouponCreateDTO): CouponModel 
     return {} as CouponModel;
   }
 
-  const { name, expiryDate, discount } = dto;
+  const { expiryDate, discount } = dto;
   return {
-    name,
     expiryDate,
     discount,
   } as CouponModel;
@@ -23,9 +22,8 @@ export function mapCreateDTOtoCouponDocument(dto: CouponCreateDTO): CouponModel 
 export function mapUpdateDTOtoCouponUpdate(dto: CouponUpdateDTO): CouponUpdateModel {
   console.debug('[couponDTOEntityMapper] mapping CouponUpdateDTO to Coupon');
 
-  const { name, code, expiryDate, discount, redeemed } = dto;
+  const { code, expiryDate, discount, redeemed } = dto;
   return {
-    name,
     code,
     expiryDate,
     discount,
@@ -38,7 +36,6 @@ export function mapDocumentToDTO(doc: CouponModel): CouponDTO {
 
   return {
     id: doc._id,
-    name: doc.name,
     code: doc.code,
     expiryDate: doc.expiryDate,
     discount: {

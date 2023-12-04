@@ -1,7 +1,6 @@
 import { Document } from 'mongoose';
 
 export interface CouponModel extends Document {
-  name?: string;
   code: string;
   expiryDate: Date;
   discount: {

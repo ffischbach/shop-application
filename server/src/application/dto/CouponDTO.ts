@@ -1,6 +1,5 @@
 export interface CouponDTO {
   id: string;
-  name?: string;
   code: string;
   expiryDate: Date;
   discount: {
