@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import CouponService from '../../../application/services/CouponService';
 import { CouponCreateDTO } from '../../../application/dto/CouponCreateDTO';
 import { CouponDTO } from '../../../application/dto/CouponDTO';
+import { validationResult } from 'express-validator';
 
 export default class CouponController {
   private couponService: CouponService;
@@ -12,8 +13,14 @@ export default class CouponController {
 
   getCouponById = async (req: Request, res: Response): Promise<void> => {
     console.debug('[CouponController] getCouponById called with id:', req.params.id);
-    const couponId: string = req.params.id;
 
+    const validationErrors = validationResult(req);
+    if (!validationErrors.isEmpty()) {
+      res.status(400).json({ errors: validationErrors.array() });
+      return;
+    }
+
+    const couponId: string = req.params.id;
     if (couponId.length != 24) {
       res.status(500).json({ error: 'Invalid Coupon Id' });
     }
@@ -36,6 +43,13 @@ export default class CouponController {
 
   createCoupon = async (req: Request, res: Response): Promise<void> => {
     console.debug('[CouponController] createCoupon called with body', req.body);
+
+    const validationErrors = validationResult(req);
+    if (!validationErrors.isEmpty()) {
+      res.status(400).json({ errors: validationErrors.array() });
+      return;
+    }
+
     const couponData: CouponCreateDTO = req.body;
 
     try {
@@ -49,6 +63,13 @@ export default class CouponController {
 
   updateCoupon = async (req: Request, res: Response): Promise<void> => {
     console.debug('[CouponController] updateCoupon called with body ' + req.body + ' and id: ' + req.params.id);
+
+    const validationErrors = validationResult(req);
+    if (!validationErrors.isEmpty()) {
+      res.status(400).json({ errors: validationErrors.array() });
+      return;
+    }
+
     const couponId = req.params.id;
     const updatedData = req.body;
 
@@ -72,6 +93,13 @@ export default class CouponController {
 
   redeemCoupon = async (req: Request, res: Response): Promise<void> => {
     console.debug('[CouponController] redeemCoupon called with id:', req.params.code);
+
+    const validationErrors = validationResult(req);
+    if (!validationErrors.isEmpty()) {
+      res.status(400).json({ errors: validationErrors.array() });
+      return;
+    }
+
     const code: string = req.params.code;
 
     try {
@@ -96,8 +124,14 @@ export default class CouponController {
 
   deleteCoupon = async (req: Request, res: Response): Promise<void> => {
     console.debug('[CouponController] deleteCoupon called with id:', req.params.id);
-    const couponId = req.params.id;
 
+    const validationErrors = validationResult(req);
+    if (!validationErrors.isEmpty()) {
+      res.status(400).json({ errors: validationErrors.array() });
+      return;
+    }
+
+    const couponId = req.params.id;
     if (couponId.length != 24) {
       console.error('Invalid Coupon Id');
       res.status(404).json({ error: 'Invalid Coupon Id' });
