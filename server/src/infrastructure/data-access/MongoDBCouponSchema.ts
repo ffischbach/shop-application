@@ -16,6 +16,11 @@ const MongoDBCouponSchema = new Schema<CouponModel>(
       type: Schema.Types.Mixed,
       default: {},
     },
+    redeemed: {
+      type: Boolean,
+      default: false,
+      required: true,
+    },
   },
   {
     timestamps: {
