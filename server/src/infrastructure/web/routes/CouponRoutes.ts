@@ -26,7 +26,7 @@ const couponController = new CouponController(couponService);
 /**
  * Coupon Discount
  * @typedef {object} CouponDiscount
- * @property {string} type.required - The discount type (percentage or amount)
+ * @property {string} type.required - enum:PERCENT,AMOUNT - The discount type (percentage or amount)
  * @property {string} value.required - The value height
  * @property {string} currency - enum:EUR,USD - If type of discount is amount currency needs to be selected (EUR or USD)
  */
@@ -70,14 +70,23 @@ router.get('/coupon/:id', couponController.getCouponById);
  * @summary Create a new coupon
  * @tags coupons
  * @param {CouponRequestPayload} request.body.required - coupon info
- * @example request - to successfully create a new coupon
+ * @example request - to successfully create a new coupon with value 50 €
  * {
- *   "name": "neuer coupon",
+ *   "name": "new amount coupon",
  *   "expiryDate": "2024-01-01T00:00:00.000Z",
  *   "discount": {
- *     "type": "amount",
+ *     "type": "AMOUNT",
  *     "value": 50,
  *     "currency": "EUR"
+ *   }
+ * }
+ * @example request - to successfully create a new coupon with value 50 %
+ * {
+ *   "name": "new percent coupon",
+ *   "expiryDate": "2024-01-01T00:00:00.000Z",
+ *   "discount": {
+ *     "type": "PERCENT",
+ *     "value": 30,
  *   }
  * }
  *
@@ -89,7 +98,7 @@ router.get('/coupon/:id', couponController.getCouponById);
  *   "code": "20fe00ef-2f50-49c3-b3cb-b48166e3560a",
  *   "expiryDate": "2024-01-01T00:00:00.000Z",
  *   "discount": {
- *     "type": "amount",
+ *     "type": "AMOUNT",
  *     "value": 50,
  *     "currency": "EUR"
  *   }
@@ -108,7 +117,7 @@ router.post('/coupon', couponController.createCoupon);
  *   "name": "neuer coupon",
  *   "expiryDate": "2024-01-01T00:00:00.000Z",
  *   "discount": {
- *     "type": "amount",
+ *     "type": "AMOUNT",
  *     "value": 50,
  *     "currency": "EUR"
  *   }
@@ -122,7 +131,7 @@ router.post('/coupon', couponController.createCoupon);
  *   "code": "20fe00ef-2f50-49c3-b3cb-b48166e3560a",
  *   "expiryDate": "2024-01-01T00:00:00.000Z",
  *   "discount": {
- *     "type": "amount",
+ *     "type": "AMOUNT",
  *     "value": 50,
  *     "currency": "EUR"
  *   }

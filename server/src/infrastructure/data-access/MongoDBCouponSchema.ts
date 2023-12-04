@@ -21,7 +21,7 @@ const MongoDBCouponSchema = new Schema<CouponDocument>(
     discount: {
       type: {
         type: String,
-        enum: ['percent', 'amount'],
+        enum: ['PERCENT', 'AMOUNT'],
         required: true,
       },
       value: {

@@ -5,9 +5,9 @@ export interface CouponModel extends Document {
   code: string;
   expiryDate: Date;
   discount: {
-    type: 'percent' | 'amount';
+    type: 'PERCENT' | 'AMOUNT';
     value: number;
-    currency?: string;
+    currency?: 'EUR' | 'USD';
   };
   redeemed: boolean;
 }
