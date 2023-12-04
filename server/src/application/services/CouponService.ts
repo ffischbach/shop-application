@@ -63,7 +63,7 @@ class CouponService {
     return this.couponRepository.delete(couponId);
   }
 
-  async redeemCoupon(code: string): Promise<CouponDTO> {
+  async isCouponCodeRedeemable(code: string): Promise<boolean> {
     if (!isValidUUID(code)) {
       throw new Error(this.invalidCouponErrMsg);
     }
@@ -78,11 +78,17 @@ class CouponService {
       throw new Error(this.invalidCouponErrMsg);
     }
 
-    const couponUpdate: CouponUpdateModel = { redeemed: true } as CouponUpdateModel;
+    return true;
+  }
 
-    const result: CouponModel = await this.couponRepository.findByIdAndUpdate(coupon._id, couponUpdate);
+  async redeemCoupon(code: string): Promise<CouponDTO> {
+    if (await this.isCouponCodeRedeemable(code)) {
+      const couponUpdate: CouponUpdateModel = { redeemed: true } as CouponUpdateModel;
 
-    return mapDocumentToDTO(result);
+      const result: CouponModel = await this.couponRepository.findByCodeAndUpdate(code, couponUpdate);
+
+      return mapDocumentToDTO(result);
+    }
   }
 }
 

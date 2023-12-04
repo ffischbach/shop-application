@@ -25,6 +25,10 @@ class CouponRepository {
     return this.couponRepositoryImpl.findByIdAndUpdate(id, couponFields);
   }
 
+  async findByCodeAndUpdate(id: string, couponFields: CouponUpdateModel): Promise<CouponModel> {
+    return this.couponRepositoryImpl.findByCodeAndUpdate(id, couponFields);
+  }
+
   async delete(id: string): Promise<boolean> {
     return this.couponRepositoryImpl.delete(id);
   }

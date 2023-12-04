@@ -28,6 +28,11 @@ class MongoDBCouponRepository {
     return result ? (result.toObject() as CouponModel) : null;
   }
 
+  async findByCodeAndUpdate(code: string, updateFields): Promise<CouponModel> {
+    const result = await this.model.findOneAndUpdate({ code }, updateFields, { new: false }).exec();
+    return result ? (result.toObject() as CouponModel) : null;
+  }
+
   async delete(id: string): Promise<boolean> {
     const result = await this.model.findByIdAndDelete(id).exec();
     return !!result;

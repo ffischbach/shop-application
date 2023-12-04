@@ -92,8 +92,28 @@ export default class CouponController {
     }
   };
 
+  validateCouponCode = async (req: Request, res: Response): Promise<void> => {
+    console.debug('[CouponController] Code validation called with code:', req.params.code);
+
+    const validationErrors = validationResult(req);
+    if (!validationErrors.isEmpty()) {
+      res.status(400).json({ errors: validationErrors.array() });
+      return;
+    }
+
+    const code: string = req.params.code;
+
+    try {
+      const redeemable: boolean = await this.couponService.isCouponCodeRedeemable(code);
+      res.status(200).send(redeemable);
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).json({ error: error.message });
+    }
+  };
+
   redeemCoupon = async (req: Request, res: Response): Promise<void> => {
-    console.debug('[CouponController] redeemCoupon called with id:', req.params.code);
+    console.debug('[CouponController] redeemCoupon called with code:', req.params.code);
 
     const validationErrors = validationResult(req);
     if (!validationErrors.isEmpty()) {

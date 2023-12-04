@@ -67,6 +67,26 @@ const couponController = new CouponController(couponService);
 router.get('/coupon/:id', couponController.getCouponById);
 
 /**
+ * GET /api/coupon/redeemable/:code
+ * @summary validates Coupon redeemability via code
+ * @tags coupons
+ * @param {string} code.path.required - coupon code
+ *
+ * @return {object} 200 - coupon response
+ * @example response - 200 - code is redeemable
+ * {
+ *   true
+ * }
+ *
+ * @return {object} - 500 - Invalid Coupon
+ * @example response - 500 - Coupon is not redeemable / invalid
+ * {
+ *   "error": "Invalid Coupon"
+ * }
+ */
+router.get('/coupon/redeemable/:code', couponController.validateCouponCode);
+
+/**
  * POST /api/coupon
  * @summary Create a new coupon
  * @tags coupons
