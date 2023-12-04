@@ -47,7 +47,8 @@ export function mapDocumentToDTO(doc: CouponModel): CouponDTO {
         },
         redeemed: doc.redeemed,
       } as CouponDTO;
-    } else {
+    }
+    if (doc.discount.type === 'PERCENT') {
       return {
         id: doc._id,
         code: doc.code,
@@ -58,6 +59,8 @@ export function mapDocumentToDTO(doc: CouponModel): CouponDTO {
         },
         redeemed: doc.redeemed,
       } as CouponDTO;
+    } else {
+      throw new Error(`invalid coupon type can not be mapped to DTO`);
     }
   } else {
     throw new Error(`can not map CouponModel with ${doc.discount} type to DTO `);
