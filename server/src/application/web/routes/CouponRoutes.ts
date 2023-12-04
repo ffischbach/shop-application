@@ -23,13 +23,14 @@ const couponController = new CouponController(couponService);
  * @property {string} code.required - The coupon code is required in the response
  * @property {string} expiryDate.required - The coupon expiration Date as string
  * @property {CouponDiscount} discount.required - The discount details
- *
+ */
+/**
  * Coupon Discount
  * @typedef {object} CouponDiscount
  * @property {string} type.required - enum:PERCENT,AMOUNT - The discount type (percentage or amount)
  * @property {string} value.required - The value height
  * @property {string} currency - enum:EUR,USD - If type of discount is amount currency needs to be selected (EUR or USD)
- */
+*/
 
 /**
  * Amount Coupon Request Payload
@@ -37,23 +38,25 @@ const couponController = new CouponController(couponService);
  * @property {string} name.required - The coupon name is required in Payload
  * @property {string} expiryDate.required - The expiration Date (as string) is required
  * @property {AmountCouponDiscount} discount.required - The discount details
- *
- * Amount Coupon Discount
+*/
+/** Amount Coupon Discount
  * @typedef {object} AmountCouponDiscount
- * @property {string} type.required - enum:AMOUNT - The discount type
+ * @property {string} type.required - AMOUNT - The discount type
  * @property {string} value.required - The value height
  * @property {string} currency - enum:EUR,USD - If type of discount is amount currency needs to be selected (EUR or USD)
- *
- *
+*/
+
+/**
  * Percentage Coupon Request Payload
  * @typedef {object} PercentageCouponRequestPayload
  * @property {string} name.required - The coupon name is required in Payload
  * @property {string} expiryDate.required - The expiration Date (as string) is required
  * @property {PercentageCouponDiscount} discount.required - The discount details
- *
+ */
+/**
  * Percentage Coupon Discount
  * @typedef {object} PercentageCouponDiscount
- * @property {string} type.required - enum:PERCENT - The discount type
+ * @property {string} type.required - PERCENT - The discount type
  * @property {string} value.required - The value height
  */
 
