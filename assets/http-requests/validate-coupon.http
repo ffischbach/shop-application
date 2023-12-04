@@ -1,0 +1,2 @@
+GET http://localhost:8080/api/coupon/redeemable/3f991f92-d62b-425b-a534-b8dfdf73eb22
+Content-Type: application/json

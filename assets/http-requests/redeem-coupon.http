@@ -1,2 +1,2 @@
-PUT http://localhost:8080/api/coupon/redeem/b9b56555-ff93-42b5-94bb-ae9ec20219c1
+PUT http://localhost:8080/api/coupon/redeem/3f991f92-d62b-425b-a534-b8dfdf73eb22
 Content-Type: application/json
